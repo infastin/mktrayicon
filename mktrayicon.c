@@ -60,7 +60,7 @@ char *onclick = NULL;
 
 void tray_icon_on_click(GtkStatusIcon *status_icon, gpointer user_data) {
   if (onclick != NULL && fork() == 0) {
-    execl("/bin/bash", "bash", "-c", onclick, (char *)NULL);
+    execl("/bin/sh", "sh", "-c", onclick, (char *)NULL);
   }
 }
 
@@ -72,7 +72,7 @@ void click_menu_item(GtkMenuItem *menuitem, gpointer user_data) {
   const char *label = gtk_menu_item_get_label(menuitem);
   for (int i = 0; i < menusize; i++) {
     if (strcmp(label, onmenu[i].name) == 0 && fork() == 0) {
-      execl("/bin/bash", "bash", "-c", onmenu[i].action, (char *)NULL);
+      execl("/bin/sh", "sh", "-c", onmenu[i].action, (char *)NULL);
     }
   }
 }
